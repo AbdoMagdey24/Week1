@@ -1,5 +1,8 @@
 fun isValidSudoku(sudoku: List<List<Char>>): Boolean {
-    return checkRows(sudoku) && checkColumns(sudoku) && checkBoxes(sudoku)
+    val n = sudoku.size
+    val sqrtN = Math.sqrt(n.toDouble()).toInt()
+
+    return checkRows(sudoku) && checkColumns(sudoku, n) && checkBoxes(sudoku, n, sqrtN)
 }
 
 private fun checkRows(sudoku: List<List<Char>>): Boolean {
@@ -9,10 +12,10 @@ private fun checkRows(sudoku: List<List<Char>>): Boolean {
     return true
 }
 
-private fun checkColumns(sudoku: List<List<Char>>): Boolean {
-    for (col in 0 until 9) {
+private fun checkColumns(sudoku: List<List<Char>>, n: Int): Boolean {
+    for (col in 0 until n) {
         val columnValues = mutableListOf<Char>()
-        for (row in 0 until 9) {
+        for (row in 0 until n) {
             columnValues.add(sudoku[row][col])
         }
         if (hasDuplicate(columnValues)) return false
@@ -20,12 +23,14 @@ private fun checkColumns(sudoku: List<List<Char>>): Boolean {
     return true
 }
 
-private fun checkBoxes(sudoku: List<List<Char>>): Boolean {
-    for (boxRow in 0 until 9 step 3) {
-        for (boxCol in 0 until 9 step 3) {
+private fun checkBoxes(sudoku: List<List<Char>>, n: Int, sqrtN: Int): Boolean {
+    if (sqrtN * sqrtN != n) return false
+
+    for (boxRow in 0 until n step sqrtN) {
+        for (boxCol in 0 until n step sqrtN) {
             val boxValues = mutableListOf<Char>()
-            for (i in 0 until 3) {
-                for (j in 0 until 3) {
+            for (i in 0 until sqrtN) {
+                for (j in 0 until sqrtN) {
                     boxValues.add(sudoku[boxRow + i][boxCol + j])
                 }
             }

@@ -86,9 +86,42 @@ val invalidSudokuRow = listOf(
     listOf('.', '.', '.', '.', '8', '.', '.', '7', '7') //  Duplicate 7 in row
 )
 
+val validSudoku4x4 = listOf(
+    listOf('1', '2', '3', '4'),
+    listOf('3', '4', '1', '2'),
+    listOf('2', '1', '4', '3'),
+    listOf('4', '3', '2', '1')
+)
+
+val invalidSudoku4x4Row = listOf(
+    listOf('1', '2', '.', '1'),
+    listOf('.', '4', '1', '2'),
+    listOf('2', '.', '4', '3'),
+    listOf('4', '3', '2', '1')
+)
+
+val invalidSudoku4x4Column = listOf(
+    listOf('1', '2', '3', '.'),
+    listOf('.', '4', '1', '2'),
+    listOf('2', '1', '4', '3'),
+    listOf('4', '2', '.', '1')
+)
+
+val invalidSudoku4x4Box = listOf(
+    listOf('1', '2', '3', '4'),
+    listOf('3', '.', '1', '2'),
+    listOf('2', '1', '4', '3'),
+    listOf('4', '3', '1', '2')
+)
+
 fun main() {
     returnTrueForValidSudoku(validSudoku)
     returnFalseIfBoxHasDuplicate(invalidSudokuBox)
     returnFalseIfRowHasDuplicate(invalidSudokuRow)
     returnFalseIfColumnHasDuplicate(invalidSudokuColumn)
+    println("-----------------------------")
+    returnTrueForValidSudoku(validSudoku4x4)
+    returnFalseIfBoxHasDuplicate(invalidSudoku4x4Box)
+    returnFalseIfRowHasDuplicate(invalidSudoku4x4Row)
+    returnFalseIfColumnHasDuplicate(invalidSudoku4x4Column)
 }
