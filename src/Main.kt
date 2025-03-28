@@ -1,30 +1,37 @@
 fun isValidSudoku(sudoku: List<List<Char>>): Boolean {
-    val n = sudoku.size
-    val sqrtN = Math.sqrt(n.toDouble()).toInt()
-
-    return checkRows(sudoku) && checkColumns(sudoku, n) && checkBoxes(sudoku, n, sqrtN)
+    return checkRows(sudoku) && checkColumns(sudoku) && checkBoxes(sudoku)
 }
 
-private fun checkRows(sudoku: List<List<Char>>): Boolean {
-    for (row in sudoku) {
-        if (hasDuplicate(row)) return false
+fun checkRows(sudoku: List<List<Char>>): Boolean {
+    for ((rowIndex, row) in sudoku.withIndex()) {
+        val duplicate = getDuplicateOrNull(row)
+        if (duplicate != null){
+              println("First Duplicate '$duplicate' found at row ${rowIndex + 1}")
+            return false
+        }
     }
     return true
 }
 
-private fun checkColumns(sudoku: List<List<Char>>, n: Int): Boolean {
-    for (col in 0 until n) {
+ fun checkColumns(sudoku: List<List<Char>>): Boolean {
+    for (col in 0 until sudoku.size) {
         val columnValues = mutableListOf<Char>()
-        for (row in 0 until n) {
+        for (row in 0 until sudoku.size) {
             columnValues.add(sudoku[row][col])
         }
-        if (hasDuplicate(columnValues)) return false
+        val duplicate = getDuplicateOrNull(columnValues)
+        if (duplicate != null) {
+               println("First Duplicate '$duplicate' found at column ${col + 1}")
+            return false
+        }
     }
     return true
 }
 
-private fun checkBoxes(sudoku: List<List<Char>>, n: Int, sqrtN: Int): Boolean {
-    if (sqrtN * sqrtN != n) return false
+ fun checkBoxes(sudoku: List<List<Char>>): Boolean {
+     val n = sudoku.size
+     val sqrtN = Math.sqrt(n.toDouble()).toInt()
+     if (sqrtN * sqrtN != n) return false
 
     for (boxRow in 0 until n step sqrtN) {
         for (boxCol in 0 until n step sqrtN) {
@@ -34,17 +41,21 @@ private fun checkBoxes(sudoku: List<List<Char>>, n: Int, sqrtN: Int): Boolean {
                     boxValues.add(sudoku[boxRow + i][boxCol + j])
                 }
             }
-            if (hasDuplicate(boxValues)) return false
+            val duplicate = getDuplicateOrNull(boxValues)
+            if (duplicate != null) {
+                 println("First Duplicate '$duplicate' found at box start at(${boxRow+1},${boxCol+1})")
+                return false
+            }
         }
     }
     return true
 }
 
-private fun hasDuplicate(numbers: List<Char>): Boolean {
+private fun getDuplicateOrNull(numbers: List<Char>): Char? {
     val seen = mutableSetOf<Char>()
     for (num in numbers) {
-        if (num != '.' && num in seen) return true
+        if (num != '.' && num in seen) return num
         seen.add(num)
     }
-    return false
+    return null
 }

@@ -111,7 +111,7 @@ val invalidSudoku4x4Box = listOf(
     listOf('1', '2', '3', '4'),
     listOf('3', '.', '1', '2'),
     listOf('2', '1', '4', '3'),
-    listOf('4', '3', '1', '2')
+    listOf('4', '3', '4', '2')
 )
 
 fun main() {
