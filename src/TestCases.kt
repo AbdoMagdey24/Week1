@@ -80,28 +80,28 @@ fun returnFalseWhenIpIsInvalid(ip: String) {
 }
 
 fun main() {
-    returnTrueIfAnySegmentIsBig(256)
 
-    returnTrueIfAnySegmentIsSmall(-1)
+    println(isValidIp("192.168.1.1"))
+    println(isValidIp("10.0.0.1"))
+    println(isValidIp("172.16.254.1"))
+    println(isValidIp("8.8.8.8"))
+    println(isValidIp("1.1.1.1"))
+    println(isValidIp("123.45.67.89"))
+    println(isValidIp("255.255.255.255"))
+    println(isValidIp("192.0.2.146"))
+    println(isValidIp("198.51.100.42"))
+    println(isValidIp("203.0.113.76"))
 
-    returnTrueIfIpHasMoreSegments(5)
+    println()
 
-    returnTrueIfIpHasLessSegments(3)
-
-    returnFalseIfSegmentIsNotDigits("one")
-
-    returnFalseIfIpDoesNotContainDot()
-
-    returnTrueIfLeadingZero("01")
-
-    returnTrueWhenIpIsValid("192.168.1.1")
-    returnTrueWhenIpIsValid("8.8.8.8")
-    returnTrueWhenIpIsValid("1.2.3.4")
-    returnTrueWhenIpIsValid("172.16.254.1")
-
-    returnFalseWhenIpIsInvalid("256.100.50.25")
-    returnFalseWhenIpIsInvalid("192.168.01.1")
-    returnFalseWhenIpIsInvalid("192.168.1")
-    returnFalseWhenIpIsInvalid("192.168.1.1.1")
-    returnFalseWhenIpIsInvalid("192,168,1,1")
+    println(isValidIp("256.100.50.25"))
+    println(isValidIp("192.168.1.500"))
+    println(isValidIp("10.0.0.-1"))
+    println(isValidIp("172.16.254.01"))
+    println(isValidIp("300.200.100.50"))
+    println(isValidIp("192.168.1.1.1"))
+    println(isValidIp("192.168.1"))
+    println(isValidIp("abc.def.ghi.jkl"))
+    println(isValidIp("192.168.1."))
+    println(isValidIp("...1"))
 }
