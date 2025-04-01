@@ -38,11 +38,11 @@ fun returnTrueIfIpHasLessSegments(size: Int) {
     )
 }
 
-fun returnTrueIfIpHasCharsOtherThanDots(ip: String) {
+fun returnFalseIfSegmentIsNotDigits(segment: String) {
     check(
-        name = "Return True If Ip Has Chars Other Than Dots",
-        result = containsCharsOtherDot(ip),
-        correct = true
+        name = "Return False If Segment Is Not Digits",
+        result = isValidSegmentFormat(segment),
+        correct = false
     )
 }
 
@@ -88,7 +88,7 @@ fun main() {
 
     returnTrueIfIpHasLessSegments(3)
 
-    returnTrueIfIpHasCharsOtherThanDots("192.168.one.1")
+    returnFalseIfSegmentIsNotDigits("one")
 
     returnFalseIfIpDoesNotContainDot()
 
